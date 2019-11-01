@@ -60,6 +60,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IosRenderer\GradientStackRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -141,4 +142,5 @@
       <Name>Prototype</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
