@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Prototype.ViewModels;
+using System.ComponentModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +14,7 @@ namespace Prototype.Views
         {
             InitializeComponent();
             Title = "Home Page";
+            (BindingContext as HomePageViewModel).Navigation = Navigation;
         }
     }
 }
