@@ -61,9 +61,9 @@ namespace Prototype.Droid.AndroidRenderer
             else
             {
                 linearGradient = new Android.Graphics.LinearGradient(0, 0, 0, Width,
-              this.StartColor.ToAndroid(),
-              this.EndColor.ToAndroid(),
-              Android.Graphics.Shader.TileMode.Mirror);
+                this.StartColor.ToAndroid(),
+                this.EndColor.ToAndroid(),
+                Android.Graphics.Shader.TileMode.Mirror);
             }
             Paint paint = new Android.Graphics.Paint()
             {

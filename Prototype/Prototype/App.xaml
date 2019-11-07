@@ -6,6 +6,10 @@
              mc:Ignorable="d"
              x:Class="Prototype.App">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <Color x:Key="ThemeColor">#B01968</Color>
+            <Color x:Key="StartColor">#B01968</Color>
+            <Color x:Key="EndColor">#7C1FA2</Color>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
