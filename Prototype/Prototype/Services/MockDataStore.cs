@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Prototype.Models;
+using Realms;
 
 namespace Prototype.Services
 {
     public class MockDataStore : IDataStore<Item>
     {
-        readonly List<Item> items;
+        private readonly IEnumerable<Item> items;
+        private readonly Realm _realm;
 
         public MockDataStore()
         {
-            items = new List<Item>()
-            {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
-            };
+            _realm = Realm.GetInstance();
+            _realm.BeginWrite();
+            items = _realm?.All<Item>()?.ToList();
+        }
+
+        ~MockDataStore()
+        {
+            _realm.Dispose();
         }
 
         public async Task<bool> AddItemAsync(Item item)
         {
-            items.Add(item);
+            _realm.Add(item, true);
 
             return await Task.FromResult(true);
         }
@@ -33,8 +34,8 @@ namespace Prototype.Services
         public async Task<bool> UpdateItemAsync(Item item)
         {
             var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            _realm.Remove(oldItem);
+            _realm.Add(item, true);
 
             return await Task.FromResult(true);
         }
@@ -42,7 +43,7 @@ namespace Prototype.Services
         public async Task<bool> DeleteItemAsync(string id)
         {
             var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            _realm.Remove(oldItem);
 
             return await Task.FromResult(true);
         }

@@ -12,7 +12,26 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
+            <Frame CornerRadius="10">
+                <StackLayout>
+                    <FlexLayout JustifyContent="SpaceBetween"
+                                AlignItems="Center"
+                                AlignContent="Center">
+                        <Label Text="InTime" />
+                        <TimePicker />
+                        <Button Text="Now" />
+                    </FlexLayout>
+                    <FlexLayout JustifyContent="SpaceBetween"
+                                AlignItems="Center"
+                                AlignContent="SpaceAround">
+                        <Label Text="OutTime" />
+                        <TimePicker />
+                        <Button Text="Now" />
+                    </FlexLayout>
+                    <Button Text="Submit" Command="{Binding NavigateCommand}" />
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
